@@ -1,0 +1,46 @@
+name: Workflows on PR
+
+on:
+  pull_request:
+    types: [opened, reopened, ready_for_review]
+
+jobs:
+  branch-guard:
+    uses: dramancompany/shared_workflows/.github/workflows/branch-guard.yml@main
+    # [필수항목] 없음
+    # [선택항목]
+    # 아래의 기본값 중 변경이 필요한 항목은
+    # 주석을 해제하고 사용한다
+    # with:
+    #   mainBranch: main
+    #   devBranch: develop
+    #   featureBranch: feature
+    #   releaseBranch: release
+    #   hotfixBranch: hotfix
+    #   prefixSeparator: /
+    secrets: inherit
+
+  run-linter:
+    uses: dramancompany/shared_workflows/.github/workflows/linter.yml@main
+    with:
+      # [필수항목]
+      nodeVersion: 16
+      #
+      # [선택항목]
+      # 아래의 기본값 중 변경이 필요한 항목은
+      # 주석을 해제하고 사용한다
+      #
+      # eslintArgs: '--max-warnings 0'
+      # eslintExtensions: 'ts,tsx'
+      # autoFix: false
+    secrets: inherit
+
+  assign-reviewers:
+    if: ${{ contains(github.event.pull_request.base.ref, 'develop') || contains(github.event.pull_request.base.ref, 'feature') }}
+    uses: dramancompany/shared_workflows/.github/workflows/assign-reviewers.yml@main
+    # https://dramancompany.atlassian.net/wiki/spaces/API/pages/27852079263/Github+Repository+PR
+    # 위 링크 참조하여 config file 작성하고
+    # 설정 파일 경로가 아래 기본값과 다를 경우
+    # 올바른 경로를 지정해준다
+    # with:
+    #   configFilePath: '.github/auto_assign_config.yml'
