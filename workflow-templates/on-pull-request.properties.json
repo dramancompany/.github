@@ -1,5 +1,4 @@
 {
   "name": "Workflows on PR",
-  "description": "PR시 실행할 여러 workflow",
-  "filePatterns": ["package.json"]
+  "description": "PR시 실행할 여러 workflow"
 }

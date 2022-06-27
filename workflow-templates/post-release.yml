@@ -1,0 +1,35 @@
+# release or hotfix branch -> main(master) branch 머지 후 실행
+# 1. develop branch 최신화
+# 2. release/hotfix 버전 참조하여 지라 릴리즈 버전 생성
+#    - 이미 생성되어 있는 경우는 skip
+# 3. 관련 이슈 해당 지라 릴리즈 버전 레이블링 및 '완료' 상태로 변환
+# 4. (선택) 해당 지라 릴리즈 버전 릴리즈
+
+name: Post Release
+
+# trigger 조건
+# https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows 참조
+on:
+  pull_request:
+    types: [closed]
+    branches: [master]
+
+jobs:
+  post-release:
+    if: ${{ github.event.pull_request.merged }}
+    uses: dramancompany/shared_workflows/.github/workflows/post-release.yml@main
+    with:
+      # [필수항목]
+      jiraProjectKey: PCWEB
+      jiraVersionPrefix: career-v
+
+      # [선택항목]
+      # '완료' 상태를 나타내는 상태명 (includes로 체크함)
+      # jiraIssueDoneStatusName: 'Done'
+      # 자동으로 지라 버전 릴리즈 처리할지 여부
+      # jiraShouldRelease: true
+      # 메인 브랜치명
+      # mainBranch: main
+      # 개발 브랜치명
+      # devBranch: develop
+    secrets: inherit

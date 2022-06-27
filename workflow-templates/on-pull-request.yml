@@ -1,16 +1,26 @@
 name: Workflows on PR
 
+# trigger 조건
+# https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows 참조
 on:
   pull_request:
     types: [opened, reopened, ready_for_review]
 
+# 실행할 jobs
 jobs:
+  # 브랜치가 올바르게 지정되었는지 확인
+  # feature/** -> feature/**
+  # feature/** -> develop
+  # release/** -> main/master
+  # hotfix/** -> main/master
   branch-guard:
     uses: dramancompany/shared_workflows/.github/workflows/branch-guard.yml@main
     # [필수항목] 없음
+
     # [선택항목]
     # 아래의 기본값 중 변경이 필요한 항목은
     # 주석을 해제하고 사용한다
+
     # with:
     #   mainBranch: main
     #   devBranch: develop
@@ -20,21 +30,23 @@ jobs:
     #   prefixSeparator: /
     secrets: inherit
 
+  # ESlint 실행
   run-linter:
     uses: dramancompany/shared_workflows/.github/workflows/linter.yml@main
     with:
       # [필수항목]
       nodeVersion: 16
-      #
+
       # [선택항목]
       # 아래의 기본값 중 변경이 필요한 항목은
       # 주석을 해제하고 사용한다
-      #
+
       # eslintArgs: '--max-warnings 0'
       # eslintExtensions: 'ts,tsx'
       # autoFix: false
     secrets: inherit
 
+  # 리뷰어 지정
   assign-reviewers:
     if: ${{ contains(github.event.pull_request.base.ref, 'develop') || contains(github.event.pull_request.base.ref, 'feature') }}
     uses: dramancompany/shared_workflows/.github/workflows/assign-reviewers.yml@main

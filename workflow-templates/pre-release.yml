@@ -1,0 +1,45 @@
+# 1. 버전 정보를 입력받아
+# 2. develop branch를 base로 release branch를 생성하고
+# 3. release branch -> main(master) branch로 PR을 생성한다.
+
+name: Prepare Release
+
+# trigger 조건
+# https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows 참조
+on:
+  workflow_dispatch:
+    inputs:
+      # package.json의 버전으로 버전 관리를 하는 경우
+      bumpLevel:
+        description: '버전 업 방식 (Semver) 선택'
+        required: true
+        default: 'patch'
+        type: choice
+        options:
+          - major
+          - minor
+          - patch
+      # package.json의 버전을 사용하지 않는 경우
+      # (버전을 직접 입력)
+      # version:
+      #   description: '릴리즈 버전을 입력하세요.'
+      #   required: true
+
+jobs:
+  prepare-release:
+    uses: dramancompany/shared_workflows/.github/workflows/prepare-release.yml@main
+    with:
+      # [필수항목]
+      # usePackageJson === true 인 경우 필수
+      bumpLevel:
+      # usePackageJson === false 인 경우 필수
+      version:
+
+      # [선택항목]
+      # 아래의 기본값 중 변경이 필요한 항목은
+      # 주석을 해제하고 사용한다
+      #
+      # usePackageJson: true
+      # mainBranch: main
+      # devBranch: develop
+    secrets: inherit
