@@ -26,10 +26,5 @@
 
 <br>
 
-### [🍿 리멤버가 일하는 방법 - Remember Way](https://hello.remember.co.kr/rememberway)
-
-
-### [🎁 리멤버는 일에 '몰입'할 수 있는 환경을 제공합니다.](https://hello.remember.co.kr/benefit)
-
 
 ### [🙌 리멤버팀에 합류하세요](https://hello.remember.co.kr)
