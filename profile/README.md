@@ -1,7 +1,7 @@
 ## 우리는 400만명이 사용하는 직장인 필수앱, 리멤버를 만듭니다. 🧑‍💻
 
 ### [rememberapp.co.kr](https://rememberapp.co.kr/)
-[![Remember - 리멤버 직장인 필수 앱](https://static.rememberapp.co.kr/rmbr_og_image_new.png)](https://rememberapp.co.kr/)
+[![Remember - 리멤버 직장인 필수 앱](https://cdn.rememberapp.co.kr/logos/remember/rmbr_og_image.png)](https://rememberapp.co.kr/)
 
 리멤버는 개인회원을 위한 서비스(커리어, 커뮤니티, 나우, 명함첩)부터 기업고객을 위한 서비스(채용 솔루션, 광고 상품, 리서치 서비스, 기업용 명함관리 솔루션)까지 대한민국 직장인과 기업을 연결하는 종합 플랫폼으로서 다양한 서비스를 운영하고 있습니다.
 
